@@ -1,0 +1,44 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
+import android.view.View;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    String ret;
+    TextView txV ;
+    Button b1 ;
+    EditText inp;
+    int s , h , m , secS;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        txV = findViewById(R.id.txV);
+        b1 = findViewById(R.id.bt1);
+
+        b1.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        inp = findViewById(R.id.input);
+                        ret = inp.getText().toString();
+                        //For Calc
+                        secS = Integer.parseInt(ret);
+                        h = (secS)/(60*60);
+                        m = (secS - (h*60*60))/60;
+                        s = (secS - (h*60*60) - (m*60));
+                        txV.setText(h+":" + m + ":" + s );
+                    }
+                }
+        );
+
+    }
+
+
+}

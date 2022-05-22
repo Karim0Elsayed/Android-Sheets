@@ -1,0 +1,58 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.View;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    RadioGroup radioGroup;
+    Button bt;
+    EditText t;
+    TextView txtV;
+    String inp , out =" ";
+    double val;
+    RelativeLayout relativeLayout;
+    @SuppressLint("WrongViewCast")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        bt= findViewById(R.id.btn);
+        txtV = findViewById(R.id.out);
+        relativeLayout = findViewById(R.id.layoutId);
+        bt.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        radioGroup = findViewById(R.id.rdioG);
+                        t = findViewById(R.id.edTxt);
+                        inp = t.getText().toString();
+                        val = Double.parseDouble(inp);
+                        int choice = radioGroup.getCheckedRadioButtonId();
+                        if(choice == R.id.rdCles){
+                            val = (val*1.8) + 32;
+                            out = val +" " + " F" ;
+                            txtV.setText(out);
+                            relativeLayout.setBackgroundColor(Color.GRAY);
+                        }
+                        else if(choice == R.id.rdFel){
+                            val = (val - 32 ) * 0.5556;
+                            out = val +" " + " C " ;
+                            txtV.setText(out);
+                            relativeLayout.setBackgroundColor(Color.YELLOW);
+                        }
+                    }
+                }
+        );
+    }
+}
